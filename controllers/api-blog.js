@@ -6,13 +6,12 @@ const getSite = require('../data/visitCount');
 //请求接口配置...
 module.exports = {
 
-    //userlist全部
+    //tag全部
     'GET /api/tags':async(ctx,next)=>{
         ctx.rest({
             tags:await getTags.tags()
         })
     },
-
     //文章列表
     'GET /api/article':async(ctx,next)=>{
         ctx.rest({
@@ -23,6 +22,12 @@ module.exports = {
     'GET /api/articleHtml:id':async(ctx,next)=>{
         ctx.rest({
             articles:await getArticle.articleHtml(ctx.params.id)
+        })
+    },
+    //按时间顺序获取文章节点
+    'GET /api/articleTime':async(ctx,next)=>{
+        ctx.rest({
+            articles:await getArticle.articleTime()
         })
     },
     //访问加一
@@ -37,5 +42,6 @@ module.exports = {
             site:await getSite.visitTotal()
         })
     },
+
 
 }

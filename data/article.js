@@ -5,7 +5,7 @@ exports.article = function() {
     return new Promise(function(resolve, reject) {
         pool.getConnection(function(err, connection) {
             connection.query(
-                "SELECT id,title,date,count,scan,overview,type,tag  FROM article;",
+                "SELECT id,title,date,count,scan,overview,type,tag  FROM article ORDER BY date DESC;",
                 function selectCb(err, results) {
                     if (results) {
                         resolve(results);
@@ -46,7 +46,7 @@ exports.articleHtml = function(id) {
 
 //查询文章时间节点
 exports.articleTime = function(id) {
-    let _sql =  `SELECT title,date FROM article`
+    let _sql =  `SELECT title,date FROM article ORDER BY date DESC;`
     return new Promise(function(resolve, reject) {
         pool.getConnection(function(err, connection) {
             connection.query(
@@ -64,3 +64,7 @@ exports.articleTime = function(id) {
         })
     });
 };
+
+
+//查询文章类别
+
